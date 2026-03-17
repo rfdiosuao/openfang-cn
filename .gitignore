@@ -1,0 +1,47 @@
+# Build
+/target
+**/*.rs.bk
+*.pdb
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# User config (may contain API keys)
+config.toml
+
+# Certificates & keys
+*.pem
+*.key
+*.cert
+*.p12
+*.pfx
+
+# Runtime artifacts
+collector_hand_state.json
+collector_knowledge_base.json
+predictions_database.json
+prediction_report_*.md
+BUILD_LOG.md
+
+# OS
+.DS_Store
+._*
+Thumbs.db
+
+# IDE & tools
+.idea/
+.vscode/
+.claude/
+*.swp
+*.swo
+*~
+.serena/

@@ -1,0 +1,27 @@
+[package]
+name = "openfang-skills"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Skill system for OpenFang — registry, loader, marketplace, and OpenClaw compatibility"
+
+[dependencies]
+openfang-types = { path = "../openfang-types" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+toml = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+tokio = { workspace = true }
+walkdir = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+reqwest = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+serde_yaml = { workspace = true }
+zip = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+tokio-test = { workspace = true }

@@ -1,0 +1,162 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/openfang-types",
+    "crates/openfang-memory",
+    "crates/openfang-runtime",
+    "crates/openfang-wire",
+    "crates/openfang-api",
+    "crates/openfang-kernel",
+    "crates/openfang-cli",
+    "crates/openfang-channels",
+    "crates/openfang-migrate",
+    "crates/openfang-skills",
+    "crates/openfang-desktop",
+    "crates/openfang-hands",
+    "crates/openfang-extensions",
+    "xtask",
+]
+
+[workspace.package]
+version = "0.4.4"
+edition = "2021"
+license = "Apache-2.0 OR MIT"
+repository = "https://github.com/RightNow-AI/openfang"
+rust-version = "1.75"
+
+[workspace.dependencies]
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+tokio-stream = "0.1"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+rmp-serde = "1"
+
+# Error handling
+thiserror = "2"
+anyhow = "1"
+
+# Concurrency
+dashmap = "6"
+crossbeam = "0.8"
+
+# Logging / Tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+# Time
+chrono = { version = "0.4", features = ["serde"] }
+chrono-tz = "0.10"
+
+# IDs
+uuid = { version = "1", features = ["v4", "v5", "serde"] }
+
+# Database
+rusqlite = { version = "0.31", features = ["bundled", "serde_json"] }
+
+# CLI
+clap = { version = "4", features = ["derive"] }
+clap_complete = "4"
+
+# HTTP client (for LLM drivers)
+reqwest = { version = "0.12", default-features = false, features = ["json", "stream", "multipart", "rustls-tls", "gzip", "deflate", "brotli"] }
+
+# Async trait
+async-trait = "0.1"
+
+# Base64
+base64 = "0.22"
+
+# Bytes
+bytes = "1"
+
+# Futures
+futures = "0.3"
+
+# WebSocket client (for Discord/Slack gateway)
+tokio-tungstenite = { version = "0.24", default-features = false, features = ["connect", "rustls-tls-native-roots"] }
+url = "2"
+
+# WASM sandbox
+wasmtime = "41"
+
+# HTTP server (for API daemon)
+axum = { version = "0.8", features = ["ws"] }
+tower = "0.5"
+tower-http = { version = "0.6", features = ["cors", "trace", "compression-gzip", "compression-br"] }
+
+# Home directory resolution
+dirs = "6"
+
+# YAML parsing
+serde_yaml = "0.9"
+
+# JSON5 parsing
+json5 = "0.4"
+
+# Directory walking
+walkdir = "2"
+
+# Security
+sha2 = "0.10"
+sha1 = "0.10"
+aes = "0.8"
+cbc = "0.1"
+hmac = "0.12"
+hex = "0.4"
+subtle = "2"
+ed25519-dalek = { version = "2", features = ["rand_core"] }
+rand = "0.8"
+zeroize = { version = "1", features = ["derive"] }
+
+# Rate limiting
+governor = "0.8"
+
+# Interactive CLI
+ratatui = "0.29"
+colored = "3"
+
+# Encryption
+aes-gcm = "0.10"
+argon2 = "0.5"
+
+# HTML entity decoding
+html-escape = "0.2"
+
+# Lightweight regex
+regex-lite = "0.1"
+
+# Socket options (SO_REUSEADDR)
+socket2 = "0.5"
+
+# Zip archive extraction
+zip = { version = "2", default-features = false, features = ["deflate"] }
+
+# Email (SMTP + IMAP)
+lettre = { version = "0.11", default-features = false, features = ["builder", "hostname", "smtp-transport", "tokio1", "tokio1-rustls-tls"] }
+imap = "2"
+native-tls = "0.2"
+mailparse = "0.16"
+
+# OpenSSL (vendored = statically compiled, no runtime libssl dependency on Linux)
+openssl = { version = "0.10", features = ["vendored"] }
+
+# Testing
+tokio-test = "0.4"
+tempfile = "3"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true
+opt-level = 3
+
+[profile.release-fast]
+inherits = "release"
+lto = "thin"
+codegen-units = 8
+opt-level = 2
+strip = false

@@ -1,0 +1,25 @@
+# NOTE: The GHCR image (ghcr.io/rightnow-ai/openfang) is not yet public.
+# For now, build from source using `docker compose up --build`.
+# See: https://github.com/RightNow-AI/openfang/issues/12
+
+version: "3.8"
+services:
+  openfang:
+    build: .
+    # image: ghcr.io/rightnow-ai/openfang:latest  # Uncomment when GHCR is public
+    ports:
+      - "4200:4200"
+    volumes:
+      - openfang-data:/data
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - GROQ_API_KEY=${GROQ_API_KEY:-}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
+      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN:-}
+      - SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN:-}
+      - SLACK_APP_TOKEN=${SLACK_APP_TOKEN:-}
+    restart: unless-stopped
+
+volumes:
+  openfang-data:

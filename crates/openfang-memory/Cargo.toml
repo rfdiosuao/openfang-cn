@@ -1,0 +1,23 @@
+[package]
+name = "openfang-memory"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Memory substrate for the OpenFang Agent OS"
+
+[dependencies]
+openfang-types = { path = "../openfang-types" }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+rmp-serde = { workspace = true }
+rusqlite = { workspace = true }
+chrono = { workspace = true }
+uuid = { workspace = true }
+thiserror = { workspace = true }
+async-trait = { workspace = true }
+tracing = { workspace = true }
+
+[dev-dependencies]
+tokio-test = { workspace = true }
+tempfile = { workspace = true }

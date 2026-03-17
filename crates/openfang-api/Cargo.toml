@@ -1,0 +1,45 @@
+[package]
+name = "openfang-api"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "HTTP/WebSocket API server for the OpenFang Agent OS daemon"
+
+[dependencies]
+openfang-types = { path = "../openfang-types" }
+openfang-kernel = { path = "../openfang-kernel" }
+openfang-runtime = { path = "../openfang-runtime" }
+openfang-memory = { path = "../openfang-memory" }
+openfang-channels = { path = "../openfang-channels" }
+openfang-wire = { path = "../openfang-wire" }
+openfang-skills = { path = "../openfang-skills" }
+openfang-hands = { path = "../openfang-hands" }
+openfang-extensions = { path = "../openfang-extensions" }
+openfang-migrate = { path = "../openfang-migrate" }
+dashmap = { workspace = true }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+toml = { workspace = true }
+tracing = { workspace = true }
+async-trait = { workspace = true }
+axum = { workspace = true }
+tower = { workspace = true }
+tower-http = { workspace = true }
+chrono = { workspace = true }
+uuid = { workspace = true }
+futures = { workspace = true }
+governor = { workspace = true }
+tokio-stream = { workspace = true }
+subtle = { workspace = true }
+base64 = { workspace = true }
+sha2 = { workspace = true }
+hmac = { workspace = true }
+hex = { workspace = true }
+socket2 = { workspace = true }
+reqwest = { workspace = true }
+
+[dev-dependencies]
+tokio-test = { workspace = true }
+tempfile = { workspace = true }
+uuid = { workspace = true }

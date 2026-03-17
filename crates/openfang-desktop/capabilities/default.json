@@ -1,0 +1,17 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nicedoc/tauri/refs/heads/dev/crates/tauri-utils/schema.json",
+  "identifier": "default",
+  "description": "Default permissions for the OpenFang desktop app",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "notification:default",
+    "shell:default",
+    "dialog:default",
+    "global-shortcut:allow-register",
+    "global-shortcut:allow-unregister",
+    "global-shortcut:allow-is-registered",
+    "autostart:default",
+    "updater:default"
+  ]
+}

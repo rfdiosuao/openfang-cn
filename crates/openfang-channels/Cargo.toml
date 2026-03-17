@@ -1,0 +1,42 @@
+[package]
+name = "openfang-channels"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Channel Bridge Layer — pluggable messaging integrations for OpenFang"
+
+[dependencies]
+openfang-types = { path = "../openfang-types" }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+chrono = { workspace = true }
+dashmap = { workspace = true }
+async-trait = { workspace = true }
+futures = { workspace = true }
+reqwest = { workspace = true }
+tokio-stream = { workspace = true }
+tracing = { workspace = true }
+uuid = { workspace = true }
+tokio-tungstenite = { workspace = true }
+url = { workspace = true }
+zeroize = { workspace = true }
+axum = { workspace = true }
+hmac = { workspace = true }
+sha2 = { workspace = true }
+sha1 = { workspace = true }
+aes = "0.8"
+cbc = "0.1"
+base64 = { workspace = true }
+hex = { workspace = true }
+html-escape = { workspace = true }
+regex-lite = "0.1"
+roxmltree = "0.20"
+
+lettre = { workspace = true }
+imap = { workspace = true }
+native-tls = { workspace = true }
+mailparse = { workspace = true }
+
+[dev-dependencies]
+tokio-test = { workspace = true }

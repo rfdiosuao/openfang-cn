@@ -1,0 +1,48 @@
+# OpenFang Agent OS — Example Configuration
+# Copy to ~/.openfang/config.toml and customize.
+
+# API server settings
+# api_key = ""                               # Set to enable Bearer auth (recommended)
+# api_listen = "127.0.0.1:50051"             # HTTP API bind address (use 0.0.0.0 for public)
+
+[default_model]
+provider = "anthropic"                    # "anthropic", "gemini", "openai", "groq", "ollama", etc.
+model = "claude-sonnet-4-20250514"        # Model identifier
+api_key_env = "ANTHROPIC_API_KEY"         # Environment variable holding API key
+# base_url = "https://api.anthropic.com"  # Optional: override API endpoint
+
+[memory]
+decay_rate = 0.05                         # Memory confidence decay rate
+# sqlite_path = "~/.openfang/data/openfang.db"   # Optional: custom DB path
+
+[network]
+listen_addr = "127.0.0.1:4200"           # OFP listen address
+# shared_secret = ""                      # Required for P2P authentication
+
+# Session compaction (LLM-based context management)
+# [compaction]
+# threshold = 80                          # Compact when messages exceed this count
+# keep_recent = 20                        # Keep this many recent messages after compaction
+# max_summary_tokens = 1024               # Max tokens for LLM summary
+
+# Usage tracking display
+# usage_footer = "Full"                   # "Off", "Tokens", "Cost", or "Full"
+
+# Channel adapters (configure tokens via environment variables)
+# [telegram]
+# bot_token_env = "TELEGRAM_BOT_TOKEN"
+# allowed_users = []                      # Empty = allow all
+
+# [discord]
+# bot_token_env = "DISCORD_BOT_TOKEN"
+# guild_ids = []                          # Empty = all guilds
+
+# [slack]
+# bot_token_env = "SLACK_BOT_TOKEN"
+# app_token_env = "SLACK_APP_TOKEN"
+
+# MCP server connections
+# [[mcp_servers]]
+# name = "filesystem"
+# command = "npx"
+# args = ["-y", "@modelcontextprotocol/server-filesystem", "/tmp"]

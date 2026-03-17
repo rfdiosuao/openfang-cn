@@ -1,0 +1,22 @@
+{
+  "name": "@openfang/whatsapp-gateway",
+  "version": "0.1.0",
+  "description": "WhatsApp Web gateway for OpenFang — QR code login, bidirectional messaging via Baileys",
+  "bin": {
+    "openfang-whatsapp-gateway": "./index.js"
+  },
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6",
+    "qrcode": "^1.5",
+    "pino": "^9"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}

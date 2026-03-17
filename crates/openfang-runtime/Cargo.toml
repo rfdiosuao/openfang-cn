@@ -1,0 +1,38 @@
+[package]
+name = "openfang-runtime"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Agent runtime and execution environment for OpenFang"
+
+[dependencies]
+openfang-types = { path = "../openfang-types" }
+openfang-memory = { path = "../openfang-memory" }
+openfang-skills = { path = "../openfang-skills" }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+reqwest = { workspace = true }
+thiserror = { workspace = true }
+async-trait = { workspace = true }
+tracing = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+futures = { workspace = true }
+base64 = { workspace = true }
+bytes = { workspace = true }
+tokio-stream = { workspace = true }
+wasmtime = { workspace = true }
+anyhow = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+zeroize = { workspace = true }
+dashmap = { workspace = true }
+regex-lite = { workspace = true }
+rusqlite = { workspace = true }
+tokio-tungstenite = "0.24"
+shlex = "1"
+
+[dev-dependencies]
+tokio-test = { workspace = true }
+tempfile = { workspace = true }
