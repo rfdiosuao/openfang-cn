@@ -48,7 +48,7 @@ OpenFang 是一个开源的智能体操作系统（Agent OS），本项目为其
 
 ```bash
 # 克隆仓库
-git clone https://github.com/RuofengHeang/openfang-cn.git
+git clone https://github.com/rfdiosuao/openfang-cn.git
 cd openfang-cn
 
 # 编译项目 (需要 Rust 环境)
