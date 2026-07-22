@@ -152,12 +152,10 @@ impl ExtensionsState {
                 self.sub = ExtSub::Health;
                 return ExtensionsAction::RefreshHealth;
             }
-            KeyCode::Char('/') => {
-                if self.sub == ExtSub::Browse {
-                    self.searching = true;
-                    self.search_query.clear();
-                    return ExtensionsAction::Continue;
-                }
+            KeyCode::Char('/') if self.sub == ExtSub::Browse => {
+                self.searching = true;
+                self.search_query.clear();
+                return ExtensionsAction::Continue;
             }
             _ => {}
         }

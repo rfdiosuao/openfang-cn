@@ -237,15 +237,11 @@ impl LogsState {
                 self.auto_refresh = !self.auto_refresh;
             }
             KeyCode::Char('r') => return LogsAction::Refresh,
-            KeyCode::End => {
-                if total > 0 {
-                    self.list_state.select(Some(total - 1));
-                }
+            KeyCode::End if total > 0 => {
+                self.list_state.select(Some(total - 1));
             }
-            KeyCode::Home => {
-                if total > 0 {
-                    self.list_state.select(Some(0));
-                }
+            KeyCode::Home if total > 0 => {
+                self.list_state.select(Some(0));
             }
             _ => {}
         }

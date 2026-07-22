@@ -165,11 +165,7 @@ impl TriggerState {
                 0 => self.create_agent_id.push(c),
                 2 => self.create_pattern_param.push(c),
                 3 => self.create_prompt.push(c),
-                4 => {
-                    if c.is_ascii_digit() {
-                        self.create_max_fires.push(c);
-                    }
-                }
+                4 if c.is_ascii_digit() => self.create_max_fires.push(c),
                 _ => {}
             },
             KeyCode::Backspace => match self.create_step {
