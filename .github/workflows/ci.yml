@@ -60,14 +60,16 @@ jobs:
             libayatana-appindicator3-dev \
             librsvg2-dev \
             patchelf
-      - name: Diagnose Unix process cleanup
+      - name: Test runtime (Linux)
         if: runner.os == 'Linux'
-        run: cargo test -p openfang-runtime process_manager::tests -- --nocapture --test-threads=1
-      - name: Diagnose concurrent runtime tests
+        run: cargo test -p openfang-runtime
+      - name: Test remaining workspace (Linux)
         if: runner.os == 'Linux'
-        run: cargo test -p openfang-runtime -- --nocapture
+        run: cargo test --workspace --exclude openfang-runtime
       # Tests that need a display (Tauri) are skipped in headless CI via cfg
-      - run: cargo test --workspace -- --nocapture --test-threads=1
+      - name: Test workspace
+        if: runner.os != 'Linux'
+        run: cargo test --workspace
 
   clippy:
     name: Clippy

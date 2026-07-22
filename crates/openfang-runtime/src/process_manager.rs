@@ -291,19 +291,6 @@ mod tests {
         assert_eq!(list.len(), 1);
         assert_eq!(list[0].agent_id, "agent1");
 
-        #[cfg(unix)]
-        {
-            let child_pid = pm
-                .processes
-                .get(&id)
-                .and_then(|process| process.child.id())
-                .expect("managed child should have a PID");
-            let self_stat = std::fs::read_to_string("/proc/self/stat").unwrap();
-            let child_stat = std::fs::read_to_string(format!("/proc/{child_pid}/stat")).unwrap();
-            eprintln!("PROCESS_GROUP_DIAGNOSTIC self={self_stat}");
-            eprintln!("PROCESS_GROUP_DIAGNOSTIC child={child_stat}");
-        }
-
         // Cleanup
         let _ = pm.kill(&id).await;
     }
