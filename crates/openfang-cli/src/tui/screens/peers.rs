@@ -183,7 +183,7 @@ pub fn draw(f: &mut Frame, area: Rect, state: &mut PeersState) {
                         format!(" {:<8}", p.agent_count),
                         Style::default().fg(theme::GREEN),
                     ),
-                    Span::styled(format!(" {}", &p.protocol_version), theme::dim_style()),
+                    Span::styled(format!(" {}", p.protocol_version), theme::dim_style()),
                 ]))
             })
             .collect();

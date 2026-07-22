@@ -327,7 +327,7 @@ pub fn draw(f: &mut Frame, area: Rect, state: &mut TemplatesState) {
                         Style::default().fg(theme::CYAN),
                     ),
                     Span::styled(
-                        format!(" {:<14}", &t.category),
+                        format!(" {:<14}", t.category),
                         Style::default().fg(theme::YELLOW),
                     ),
                     Span::styled(

@@ -404,11 +404,11 @@ fn draw_providers(f: &mut Frame, area: Rect, state: &mut SettingsState) {
                 };
                 ListItem::new(Line::from(vec![
                     Span::styled(
-                        format!("  {:<20}", &p.name),
+                        format!("  {:<20}", p.name),
                         Style::default().fg(theme::CYAN),
                     ),
                     Span::styled(format!(" {:<20}", badge), badge_style),
-                    Span::styled(format!(" {}", &p.env_var), theme::dim_style()),
+                    Span::styled(format!(" {}", p.env_var), theme::dim_style()),
                 ]))
             })
             .collect();
@@ -541,7 +541,7 @@ fn draw_models(f: &mut Frame, area: Rect, state: &mut SettingsState) {
                         format!(" {:<14}", truncate(&m.provider, 13)),
                         theme::dim_style(),
                     ),
-                    Span::styled(format!(" {:<10}", &m.tier), tier_style),
+                    Span::styled(format!(" {:<10}", m.tier), tier_style),
                     Span::styled(format!(" {:<10}", ctx), Style::default().fg(theme::YELLOW)),
                     Span::styled(format!(" {cost}"), theme::dim_style()),
                 ]))
