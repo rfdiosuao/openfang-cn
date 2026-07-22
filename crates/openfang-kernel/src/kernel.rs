@@ -994,7 +994,7 @@ impl OpenFangKernel {
         let workspace_dir = manifest.workspace.clone().unwrap_or_else(|| {
             self.config.effective_workspaces_dir().join(format!(
                 "{}-{}",
-                &name,
+                name,
                 &agent_id.0.to_string()[..8]
             ))
         });
@@ -1322,7 +1322,7 @@ impl OpenFangKernel {
         if manifest.workspace.is_none() {
             let workspace_dir = self.config.effective_workspaces_dir().join(format!(
                 "{}-{}",
-                &manifest.name,
+                manifest.name,
                 &agent_id.0.to_string()[..8]
             ));
             if let Err(e) = ensure_workspace(&workspace_dir) {
@@ -1779,7 +1779,7 @@ impl OpenFangKernel {
         if manifest.workspace.is_none() {
             let workspace_dir = self.config.effective_workspaces_dir().join(format!(
                 "{}-{}",
-                &manifest.name,
+                manifest.name,
                 &agent_id.0.to_string()[..8]
             ));
             if let Err(e) = ensure_workspace(&workspace_dir) {
@@ -2733,7 +2733,7 @@ impl OpenFangKernel {
         let mut bindings = self.bindings.lock().unwrap_or_else(|e| e.into_inner());
         bindings.push(binding);
         // Sort by specificity descending
-        bindings.sort_by(|a, b| b.match_rule.specificity().cmp(&a.match_rule.specificity()));
+        bindings.sort_by_key(|binding| std::cmp::Reverse(binding.match_rule.specificity()));
     }
 
     /// Remove a binding by index, returns the removed binding if valid.
@@ -4262,10 +4262,10 @@ fn infer_provider_from_model(model: &str) -> Option<String> {
             | "cohere" | "xai" | "ollama" | "together" | "fireworks" | "perplexity"
             | "cerebras" | "sambanova" | "replicate" | "huggingface" | "ai21" | "codex"
             | "claude-code" | "copilot" | "github-copilot" | "qwen" | "zhipu" | "moonshot"
-            | "openrouter" => {
-                if model.contains('/') {
-                    return Some(prefix.to_string());
-                }
+            | "openrouter"
+                if model.contains('/') =>
+            {
+                return Some(prefix.to_string());
             }
             _ => {}
         }
