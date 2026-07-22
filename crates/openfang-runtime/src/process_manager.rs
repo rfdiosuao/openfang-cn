@@ -84,11 +84,20 @@ impl ProcessManager {
             ));
         }
 
-        let mut child = tokio::process::Command::new(command)
+        let mut child_command = tokio::process::Command::new(command);
+        child_command
             .args(args)
             .stdin(Stdio::piped())
             .stdout(Stdio::piped())
-            .stderr(Stdio::piped())
+            .stderr(Stdio::piped());
+
+        // `kill_process_tree` targets the child's process group on Unix.
+        // Isolate managed processes so cleanup cannot signal OpenFang's own
+        // process group (or the surrounding CI runner).
+        #[cfg(unix)]
+        child_command.process_group(0);
+
+        let mut child = child_command
             .spawn()
             .map_err(|e| format!("Failed to start process '{}': {}", command, e))?;
 
