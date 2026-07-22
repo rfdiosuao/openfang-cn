@@ -298,7 +298,7 @@ fn draw_marketplace(f: &mut Frame, area: Rect, state: &mut HandsState) {
                     _ => Style::default().fg(theme::CYAN),
                 };
                 ListItem::new(Line::from(vec![
-                    Span::raw(format!("  {:<4}", &h.icon)),
+                    Span::raw(format!("  {:<4}", h.icon)),
                     Span::styled(
                         format!("{:<16}", truncate(&h.name, 15)),
                         Style::default().fg(theme::CYAN),
@@ -389,7 +389,7 @@ fn draw_active(f: &mut Frame, area: Rect, state: &mut HandsState) {
                         format!("  {:<16}", truncate(&i.agent_name, 15)),
                         Style::default().fg(theme::CYAN),
                     ),
-                    Span::styled(format!("{:<10}", &i.status), status_style),
+                    Span::styled(format!("{:<10}", i.status), status_style),
                     Span::styled(
                         format!("{:<20}", truncate(&i.hand_id, 19)),
                         theme::dim_style(),

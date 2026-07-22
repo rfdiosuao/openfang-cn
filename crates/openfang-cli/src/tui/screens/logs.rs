@@ -237,15 +237,11 @@ impl LogsState {
                 self.auto_refresh = !self.auto_refresh;
             }
             KeyCode::Char('r') => return LogsAction::Refresh,
-            KeyCode::End => {
-                if total > 0 {
-                    self.list_state.select(Some(total - 1));
-                }
+            KeyCode::End if total > 0 => {
+                self.list_state.select(Some(total - 1));
             }
-            KeyCode::Home => {
-                if total > 0 {
-                    self.list_state.select(Some(0));
-                }
+            KeyCode::Home if total > 0 => {
+                self.list_state.select(Some(0));
             }
             _ => {}
         }
@@ -405,6 +401,9 @@ fn truncate(s: &str, max: usize) -> String {
     if s.len() <= max {
         s.to_string()
     } else {
-        format!("{}\u{2026}", openfang_types::truncate_str(s, max.saturating_sub(1)))
+        format!(
+            "{}\u{2026}",
+            openfang_types::truncate_str(s, max.saturating_sub(1))
+        )
     }
 }

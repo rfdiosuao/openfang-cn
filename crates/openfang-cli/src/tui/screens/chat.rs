@@ -661,6 +661,9 @@ fn truncate_line(s: &str, max_len: usize) -> String {
     if s.len() <= max_len {
         s.to_string()
     } else {
-        format!("{}\u{2026}", openfang_types::truncate_str(s, max_len.saturating_sub(1)))
+        format!(
+            "{}\u{2026}",
+            openfang_types::truncate_str(s, max_len.saturating_sub(1))
+        )
     }
 }

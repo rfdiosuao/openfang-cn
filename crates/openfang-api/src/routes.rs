@@ -3642,7 +3642,10 @@ pub async fn hand_instance_browser(
                 content = data["content"].as_str().unwrap_or("").to_string();
                 // Truncate content to avoid huge payloads (UTF-8 safe)
                 if content.len() > 2000 {
-                    content = format!("{}... (truncated)", openfang_types::truncate_str(&content, 2000));
+                    content = format!(
+                        "{}... (truncated)",
+                        openfang_types::truncate_str(&content, 2000)
+                    );
                 }
             }
         }
@@ -6100,8 +6103,7 @@ pub async fn set_provider_url(
     }
 
     // Probe reachability at the new URL
-    let probe =
-        openfang_runtime::provider_health::probe_provider(&name, &base_url).await;
+    let probe = openfang_runtime::provider_health::probe_provider(&name, &base_url).await;
 
     (
         StatusCode::OK,
@@ -7079,7 +7081,9 @@ pub async fn patch_agent_config(
         if name.len() > MAX_NAME_LEN {
             return (
                 StatusCode::PAYLOAD_TOO_LARGE,
-                Json(serde_json::json!({"error": format!("Name exceeds max length ({MAX_NAME_LEN} chars)")})),
+                Json(
+                    serde_json::json!({"error": format!("Name exceeds max length ({MAX_NAME_LEN} chars)")}),
+                ),
             );
         }
     }
@@ -7087,7 +7091,9 @@ pub async fn patch_agent_config(
         if desc.len() > MAX_DESC_LEN {
             return (
                 StatusCode::PAYLOAD_TOO_LARGE,
-                Json(serde_json::json!({"error": format!("Description exceeds max length ({MAX_DESC_LEN} chars)")})),
+                Json(
+                    serde_json::json!({"error": format!("Description exceeds max length ({MAX_DESC_LEN} chars)")}),
+                ),
             );
         }
     }
@@ -7095,7 +7101,9 @@ pub async fn patch_agent_config(
         if prompt.len() > MAX_PROMPT_LEN {
             return (
                 StatusCode::PAYLOAD_TOO_LARGE,
-                Json(serde_json::json!({"error": format!("System prompt exceeds max length ({MAX_PROMPT_LEN} chars)")})),
+                Json(
+                    serde_json::json!({"error": format!("System prompt exceeds max length ({MAX_PROMPT_LEN} chars)")}),
+                ),
             );
         }
     }
@@ -8863,8 +8871,7 @@ pub async fn copilot_oauth_start() -> impl IntoResponse {
                 CopilotFlowState {
                     device_code: resp.device_code,
                     interval: resp.interval,
-                    expires_at: Instant::now()
-                        + std::time::Duration::from_secs(resp.expires_in),
+                    expires_at: Instant::now() + std::time::Duration::from_secs(resp.expires_in),
                 },
             );
 
@@ -8928,7 +8935,9 @@ pub async fn copilot_oauth_poll(
             if let Err(e) = write_secret_env(&secrets_path, "GITHUB_TOKEN", &access_token) {
                 return (
                     StatusCode::INTERNAL_SERVER_ERROR,
-                    Json(serde_json::json!({"status": "error", "error": format!("Failed to save token: {e}")})),
+                    Json(
+                        serde_json::json!({"status": "error", "error": format!("Failed to save token: {e}")}),
+                    ),
                 );
             }
 

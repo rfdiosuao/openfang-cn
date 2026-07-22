@@ -1,0 +1,37 @@
+name: 漏译或术语建议
+description: 报告中文界面的漏译、错译或术语不一致
+title: "[i18n] "
+labels: ["i18n", "needs-triage"]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: 页面或功能位置
+      placeholder: 例如：Settings > Channels
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: 当前原文 / 译文
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 建议译文与理由
+      description: 如果涉及专业术语，请附参考来源或使用场景
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 截图或文件位置
+      description: 可以提供截图，或指出对应源码文件和行号
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已搜索现有 Issue，确认没有重复报告
+          required: true

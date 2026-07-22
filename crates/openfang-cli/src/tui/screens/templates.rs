@@ -327,7 +327,7 @@ pub fn draw(f: &mut Frame, area: Rect, state: &mut TemplatesState) {
                         Style::default().fg(theme::CYAN),
                     ),
                     Span::styled(
-                        format!(" {:<14}", &t.category),
+                        format!(" {:<14}", t.category),
                         Style::default().fg(theme::YELLOW),
                     ),
                     Span::styled(
@@ -399,6 +399,9 @@ fn truncate(s: &str, max: usize) -> String {
     if s.len() <= max {
         s.to_string()
     } else {
-        format!("{}\u{2026}", openfang_types::truncate_str(s, max.saturating_sub(1)))
+        format!(
+            "{}\u{2026}",
+            openfang_types::truncate_str(s, max.saturating_sub(1))
+        )
     }
 }

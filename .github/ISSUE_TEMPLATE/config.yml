@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 上游 OpenFang Issues
+    url: https://github.com/RightNow-AI/openfang/issues
+    about: 与中文本地化无关的核心功能问题，请先检查上游项目
+  - name: 安全问题报告
+    url: https://github.com/rfdiosuao/openfang-cn/security
+    about: 不要在公开 Issue 中提交漏洞细节、密钥或敏感数据

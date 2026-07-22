@@ -183,7 +183,7 @@ pub fn draw(f: &mut Frame, area: Rect, state: &mut PeersState) {
                         format!(" {:<8}", p.agent_count),
                         Style::default().fg(theme::GREEN),
                     ),
-                    Span::styled(format!(" {}", &p.protocol_version), theme::dim_style()),
+                    Span::styled(format!(" {}", p.protocol_version), theme::dim_style()),
                 ]))
             })
             .collect();
@@ -208,6 +208,9 @@ fn truncate(s: &str, max: usize) -> String {
     if s.len() <= max {
         s.to_string()
     } else {
-        format!("{}\u{2026}", openfang_types::truncate_str(s, max.saturating_sub(1)))
+        format!(
+            "{}\u{2026}",
+            openfang_types::truncate_str(s, max.saturating_sub(1))
+        )
     }
 }

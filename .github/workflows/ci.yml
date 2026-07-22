@@ -20,7 +20,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
         with:
@@ -45,7 +45,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
         with:
@@ -60,14 +60,22 @@ jobs:
             libayatana-appindicator3-dev \
             librsvg2-dev \
             patchelf
+      - name: Test runtime (Linux)
+        if: runner.os == 'Linux'
+        run: cargo test -p openfang-runtime
+      - name: Test remaining workspace (Linux)
+        if: runner.os == 'Linux'
+        run: cargo test --workspace --exclude openfang-runtime
       # Tests that need a display (Tauri) are skipped in headless CI via cfg
-      - run: cargo test --workspace
+      - name: Test workspace
+        if: runner.os != 'Linux'
+        run: cargo test --workspace
 
   clippy:
     name: Clippy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: clippy
@@ -87,7 +95,7 @@ jobs:
     name: Format
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt
@@ -97,7 +105,7 @@ jobs:
     name: Security Audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
       - name: Install cargo-audit
@@ -109,7 +117,7 @@ jobs:
     name: Secrets Scan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Install trufflehog
