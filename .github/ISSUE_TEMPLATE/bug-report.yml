@@ -1,0 +1,61 @@
+name: Bug 报告
+description: 报告可复现的功能、构建或运行问题
+title: "[Bug] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。请先搜索已有 Issue，并删除日志中的密钥、Token 和真实业务数据。
+  - type: input
+    id: version
+    attributes:
+      label: 版本或提交
+      description: Release 版本号或 `git rev-parse --short HEAD` 输出
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: 运行平台
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - Docker
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 请提供最小、连续、可重复执行的步骤
+      placeholder: |
+        1. 执行……
+        2. 打开……
+        3. 观察到……
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期结果
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际结果与日志
+      description: 可粘贴已脱敏的日志、截图或错误堆栈
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已搜索现有 Issue
+          required: true
+        - label: 我已删除密钥、Token、Cookie 和隐私数据
+          required: true

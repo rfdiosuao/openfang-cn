@@ -130,7 +130,8 @@ pub struct OpenFangKernel {
     /// WhatsApp Web gateway child process PID (for shutdown cleanup).
     pub whatsapp_gateway_pid: Arc<std::sync::Mutex<Option<u32>>>,
     /// Channel adapters registered at bridge startup (for proactive `channel_send` tool).
-    pub channel_adapters: dashmap::DashMap<String, Arc<dyn openfang_channels::types::ChannelAdapter>>,
+    pub channel_adapters:
+        dashmap::DashMap<String, Arc<dyn openfang_channels::types::ChannelAdapter>>,
     /// Weak self-reference for trigger dispatch (set after Arc wrapping).
     self_handle: OnceLock<Weak<OpenFangKernel>>,
 }
@@ -2252,15 +2253,11 @@ impl OpenFangKernel {
     /// Switch an agent's model.
     pub fn set_agent_model(&self, agent_id: AgentId, model: &str) -> KernelResult<()> {
         // Resolve provider from model catalog so switching models also switches provider
-        let resolved_provider = self
-            .model_catalog
-            .read()
-            .ok()
-            .and_then(|catalog| {
-                catalog
-                    .find_model(model)
-                    .map(|entry| entry.provider.clone())
-            });
+        let resolved_provider = self.model_catalog.read().ok().and_then(|catalog| {
+            catalog
+                .find_model(model)
+                .map(|entry| entry.provider.clone())
+        });
 
         // If catalog lookup failed, try to infer provider from model name prefix
         let provider = resolved_provider.or_else(|| infer_provider_from_model(model));
@@ -4113,7 +4110,8 @@ impl OpenFangKernel {
                 tool_names.join(", ")
             ));
         }
-        summary.push_str("MCP tools are prefixed with mcp_{server}_ and work like regular tools.\n");
+        summary
+            .push_str("MCP tools are prefixed with mcp_{server}_ and work like regular tools.\n");
         // Add filesystem-specific guidance when a filesystem MCP server is connected
         let has_filesystem = servers.keys().any(|s| s.contains("filesystem"));
         if has_filesystem {
@@ -4279,16 +4277,26 @@ fn infer_provider_from_model(model: &str) -> Option<String> {
         Some("gemini".to_string())
     } else if lower.starts_with("claude") {
         Some("anthropic".to_string())
-    } else if lower.starts_with("gpt") || lower.starts_with("o1") || lower.starts_with("o3") || lower.starts_with("o4") {
+    } else if lower.starts_with("gpt")
+        || lower.starts_with("o1")
+        || lower.starts_with("o3")
+        || lower.starts_with("o4")
+    {
         Some("openai".to_string())
-    } else if lower.starts_with("llama") || lower.starts_with("mixtral") || lower.starts_with("qwen") {
+    } else if lower.starts_with("llama")
+        || lower.starts_with("mixtral")
+        || lower.starts_with("qwen")
+    {
         // These could be on multiple providers; don't infer
         None
     } else if lower.starts_with("grok") {
         Some("xai".to_string())
     } else if lower.starts_with("deepseek") {
         Some("deepseek".to_string())
-    } else if lower.starts_with("mistral") || lower.starts_with("codestral") || lower.starts_with("pixtral") {
+    } else if lower.starts_with("mistral")
+        || lower.starts_with("codestral")
+        || lower.starts_with("pixtral")
+    {
         Some("mistral".to_string())
     } else if lower.starts_with("command") || lower.starts_with("embed-") {
         Some("cohere".to_string())
@@ -4838,7 +4846,10 @@ impl KernelHandle for OpenFangKernel {
         };
 
         adapter
-            .send(&user, openfang_channels::types::ChannelContent::Text(message.to_string()))
+            .send(
+                &user,
+                openfang_channels::types::ChannelContent::Text(message.to_string()),
+            )
             .await
             .map_err(|e| format!("Channel send failed: {e}"))?;
 
