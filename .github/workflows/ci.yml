@@ -67,7 +67,7 @@ jobs:
         if: runner.os == 'Linux'
         run: cargo test -p openfang-runtime -- --nocapture
       # Tests that need a display (Tauri) are skipped in headless CI via cfg
-      - run: cargo test --workspace -- --nocapture
+      - run: cargo test --workspace -- --nocapture --test-threads=1
 
   clippy:
     name: Clippy
